@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cadastro } from '../cadastro';
-import { ESTUDANTES } from '../mock-estudantes';
+import { EstudanteService } from '../estudante.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,25 +10,24 @@ import { ESTUDANTES } from '../mock-estudantes';
 })
 export class CadastroComponent implements OnInit {
 
-  estudantes = ESTUDANTES;
-  
-  cadastro: Cadastro = {
-    id: 1,
-    nome: 'Guilherme',
-    curso: 'Ads',
-    idade: 18,
-    escola: 'Fatec',
-  }
-
-  constructor() { }
-
   selectedestudante?: Cadastro;
-  ngOnInit(): void {
-  }
 
-  
+  estudantes: Cadastro[] = [];
+
+  constructor(private estudanteService: EstudanteService, private messageService: MessageService) {}
+
+  ngOnInit() {
+  this.getEstudantes();
+}
+
 onSelect(ESTUDANTES: Cadastro): void {
   this.selectedestudante = ESTUDANTES;
+  this.messageService.add(`HeroesComponent: Selected hero id=${ESTUDANTES.id}`);
+}
+
+getEstudantes(): void {
+  this.estudanteService.getEstudantes()
+      .subscribe(estudante => this.estudantes = estudante);
 }
 
 }

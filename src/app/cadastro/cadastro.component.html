@@ -1,3 +1,5 @@
+<app-estud-detalhes [estudante]="selectedestudante"></app-estud-detalhes>
+
 <h2>Estudantes Cadastrados</h2>
 <ul class="estudantes">
   <li *ngFor="let estudante of estudantes" [class.selected]="estudante === selectedestudante" (click)="onSelect(estudante)" >    
@@ -5,4 +7,4 @@
   </li>
 </ul>
 
-<app-estud-detalhes [estudante]="selectedestudante"></app-estud-detalhes>
+
