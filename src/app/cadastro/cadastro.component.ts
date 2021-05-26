@@ -23,4 +23,20 @@ getEstudantes(): void {
       .subscribe(estudante => this.estudantes = estudante);
 }
 
+add(nome: string, curso: string, idade: number, escola: string): void {
+  nome = nome.trim();
+  if (!nome || !curso || !idade || !escola) { 
+    return; 
+  }
+  this.estudanteService.addEstudante({ nome, curso, idade, escola } as Cadastro)
+    .subscribe(estudante => {
+      this.estudantes.push(estudante);
+    });  
+}
+
+delete(estudante: Cadastro): void {
+  this.estudantes = this.estudantes.filter(e => e !== estudante);
+  this.estudanteService.deleteEstudante(estudante.id).subscribe();
+}
+
 }
