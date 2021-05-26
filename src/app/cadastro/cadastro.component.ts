@@ -10,19 +10,12 @@ import { MessageService } from '../message.service';
 })
 export class CadastroComponent implements OnInit {
 
-  selectedestudante?: Cadastro;
-
   estudantes: Cadastro[] = [];
 
   constructor(private estudanteService: EstudanteService, private messageService: MessageService) {}
 
   ngOnInit() {
   this.getEstudantes();
-}
-
-onSelect(ESTUDANTES: Cadastro): void {
-  this.selectedestudante = ESTUDANTES;
-  this.messageService.add(`HeroesComponent: Selected hero id=${ESTUDANTES.id}`);
 }
 
 getEstudantes(): void {
